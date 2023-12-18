@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');// for password salting and hashing method
 const BlogPost = require('../models/blogModel');
 
 // Controller methods for CRUD operations
@@ -13,7 +13,6 @@ const blogController = {
         title,
         content,
         author: hashedAuthor,
-        // other fields as needed
       });
 
       const savedPost = await newPost.save();
@@ -51,9 +50,7 @@ const blogController = {
     try {
       const { title, content } = req.body;
       const hashedAuthor = await bcrypt.hash(req.body.author, 10); // '10' is the saltRounds
-
-      
-      const updatedPost = await BlogPost.findByIdAndUpdate(
+        const updatedPost = await BlogPost.findByIdAndUpdate(
         req.params.id,
         { title, content, author: hashedAuthor },
         { new: true }

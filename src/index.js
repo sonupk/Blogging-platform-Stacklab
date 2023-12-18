@@ -1,11 +1,15 @@
 const express = require('express');
 const route = require('./route/route.js');
 const { default: mongoose } = require('mongoose');
+const loggingMiddleware = require('./middleware/loggingMiddleware');
 const app = express();
 
 app.use(express.json());
+// Applying logging middleware for all incoming requests
+app.use(loggingMiddleware);
 
-mongoose.connect("mongodb+srv://user2023:test5299@ac-5sqaj3u-shard-00-00.vfrmzq9.mongodb.net/Blogpost-DB" )
+
+mongoose.connect("mongodb+srv://sonuk:kamble123@cluster0.vfrmzq9.mongodb.net/Blogpost-DB" )
     .then(() => console.log("MongoDb is connected"))
     .catch(err => console.log(err))
 
